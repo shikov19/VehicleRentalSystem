@@ -3,12 +3,11 @@ package model;
 import interfaces.ICargoVan;
 
 public class CargoVan implements ICargoVan {
-    private String model;
-    private double value;
-    private int experience;
-    private double rentalCost;
-    private double insuranceCost;
-    private int rentalDays;
+    private final String model;
+    private final double value;
+    private final int experience;
+    private final int rentalDays;
+
     public CargoVan(String model, double value, int experience, int rentalDays) {
         this.model = model;
         this.value = value;
@@ -22,26 +21,11 @@ public class CargoVan implements ICargoVan {
     }
 
     @Override
-    public double getValue() {
-        return value;
-    }
-
-    @Override
-    public int getExperience() {
-        return experience;
-    }
-
-    @Override
     public double getInsuranceCost() {
         if (experience <= 5) {
             return (value * 0.03) / 100;
         }
         return ((value * 0.03) / 100) * 0.85;
-    }
-
-    @Override
-    public int getRentalDays() {
-        return rentalDays;
     }
 
     @Override

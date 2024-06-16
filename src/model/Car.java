@@ -3,40 +3,21 @@ package model;
 import interfaces.ICar;
 
 public class Car implements ICar {
-    private String model;
-    private double value;
-    private int rating;
-    private double rentalCost;
-    private double insuranceCost;
-    private int rentalDays;
+    private final String model;
+    private final double value;
+    private final int rating;
+    private final int rentalDays;
 
     public Car(String model, double value, int rating, int rentalDays) {
         this.model = model;
         this.value = value;
         this.rating = rating;
         this.rentalDays = rentalDays;
-        this.rentalCost = rentalCost;
-        this.insuranceCost = insuranceCost;
     }
 
     @Override
     public String getModel() {
         return model;
-    }
-
-    @Override
-    public double getValue() {
-        return value;
-    }
-
-    @Override
-    public int getRating() {
-        return rating;
-    }
-
-    @Override
-    public int getRentalDays() {
-        return rentalDays;
     }
 
     @Override
