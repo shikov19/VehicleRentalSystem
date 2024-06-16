@@ -1,4 +1,4 @@
-    package interfaces;
+package interfaces;
 
 public interface ICar {
     String getModel();
@@ -7,5 +7,4 @@ public interface ICar {
     double getRentalCost();
     int getRentalDays();
     double getInsuranceCost();
-
 }

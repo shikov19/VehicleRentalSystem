@@ -2,19 +2,17 @@ package service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import models.Car;
 
-public class InvoiceCar {
+import model.Car;
+
+public class CarService {
     public String generateInvoice(Car car, LocalDate startDate, LocalDate endDate, LocalDate returnDate, String name) {
         String model = car.getModel();
 
         long rentalPeriod = ChronoUnit.DAYS.between(startDate, endDate);
         long actualPeriod = ChronoUnit.DAYS.between(startDate, returnDate);
-
-
         double dailyInsuranceCost = car.getInsuranceCost();
         double dailyRentalCost = car.getRentalCost();
-
         double totalRentalCost = (dailyRentalCost * actualPeriod) + (dailyRentalCost / 2 * (rentalPeriod - actualPeriod));
 
         if(startDate.isEqual(returnDate)) {
@@ -24,8 +22,6 @@ public class InvoiceCar {
 
         double totalInsuranceCost = dailyInsuranceCost * actualPeriod;
         double totalPrice = totalRentalCost + totalInsuranceCost;
-
-
 
         return String.format("XXXXXXXXXXXXXXXXXXXX" +
                              "\nCustomer Name: "+ name +
@@ -40,12 +36,6 @@ public class InvoiceCar {
                              "\nTotal rent : $" + String.format("%.2f",totalRentalCost) +
                              "\nTotal insurance: $" + String.format("%.2f",totalInsuranceCost) +
                              "\nTotal: $" + String.format("%.2f",totalPrice) +
-                             "\nXXXXXXXXXXXXXXXXXXXX"
-                );
-
-
-
-
-
+                             "\nXXXXXXXXXXXXXXXXXXXX");
     }
 }

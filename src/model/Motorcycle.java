@@ -1,15 +1,16 @@
-package models;
+package model;
 
-import interfaces.iMotor;
+import interfaces.IMotorcycle;
 
-public class Motor implements iMotor {
+public class Motorcycle implements IMotorcycle {
     private String model;
     private double value;
     private int age;
     private double rentalCost;
     private double insuranceCost;
     private int rentalDays;
-    public Motor(String model, double value, int age, int rentalDays) {
+
+    public Motorcycle(String model, double value, int age, int rentalDays) {
         this.model = model;
         this.value = value;
         this.age = age;
@@ -17,7 +18,6 @@ public class Motor implements iMotor {
         this.insuranceCost = insuranceCost;
         this.rentalDays = rentalDays;
     }
-
 
     @Override
     public String getModel() {
@@ -36,8 +36,10 @@ public class Motor implements iMotor {
 
     @Override
     public double getInsuranceCost() {
-        if (age >= 25) return (value * 0.02) / 100;
-        else return ((value * 0.02) / 100) * 1.2;
+        if (age >= 25) {
+            return (value * 0.02) / 100;
+        }
+        return ((value * 0.02) / 100) * 1.2;
     }
 
     @Override
@@ -45,12 +47,11 @@ public class Motor implements iMotor {
         if(rentalDays <= 7) {
             return 15;
         }
-        else return 10;
+        return 10;
     }
 
     @Override
     public int getRentalDays() {
         return rentalDays;
     }
-
 }

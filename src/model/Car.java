@@ -1,5 +1,4 @@
-package models;
-
+package model;
 
 import interfaces.ICar;
 
@@ -10,6 +9,7 @@ public class Car implements ICar {
     private double rentalCost;
     private double insuranceCost;
     private int rentalDays;
+
     public Car(String model, double value, int rating, int rentalDays) {
         this.model = model;
         this.value = value;
@@ -18,7 +18,6 @@ public class Car implements ICar {
         this.rentalCost = rentalCost;
         this.insuranceCost = insuranceCost;
     }
-
 
     @Override
     public String getModel() {
@@ -45,9 +44,7 @@ public class Car implements ICar {
         if(rating <= 3) {
             return (value * 0.01) / 100;
         }
-        else {
-            return ((value * 0.01) / 100) * 0.9;
-        }
+        return ((value * 0.01) / 100) * 0.9;
     }
 
     @Override
@@ -55,9 +52,6 @@ public class Car implements ICar {
         if(rentalDays <= 7) {
             return 20;
         }
-        else return 15;
+        return 15;
     }
-
-
-
 }

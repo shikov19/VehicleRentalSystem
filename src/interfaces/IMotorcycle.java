@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface iMotor {
+public interface IMotorcycle {
     String getModel();
     double getValue();
     int getAge();

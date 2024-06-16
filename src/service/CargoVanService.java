@@ -1,21 +1,18 @@
 package service;
 
-import models.Motor;
+import model.CargoVan;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class InvoiceMotorcycle {
-    public String generateInvoice(Motor motor, LocalDate startDate, LocalDate endDate, LocalDate returnDate, String name) {
-        String model = motor.getModel();
-
+public class CargoVanService {
+    public String generateInvoice(CargoVan cargoVan, LocalDate startDate, LocalDate endDate, LocalDate returnDate, String name) {
+        String model = cargoVan.getModel();
 
         long rentalPeriod = ChronoUnit.DAYS.between(startDate, endDate);
         long actualPeriod = ChronoUnit.DAYS.between(startDate, returnDate);
-
-        double dailyInsuranceCost = motor.getInsuranceCost();
-        double dailyRentalCost = motor.getRentalCost();
-
+        double dailyInsuranceCost = cargoVan.getInsuranceCost();
+        double dailyRentalCost = cargoVan.getRentalCost();
         double totalRentalCost = (dailyRentalCost * actualPeriod) + (dailyRentalCost / 2 * (rentalPeriod - actualPeriod));
 
         if(startDate.isEqual(returnDate)) {
@@ -24,7 +21,6 @@ public class InvoiceMotorcycle {
         }
 
         double totalInsuranceCost = dailyInsuranceCost * actualPeriod;
-
         double totalPrice = totalRentalCost + totalInsuranceCost;
 
         return String.format("XXXXXXXXXXXXXXXXXXXX" +
@@ -32,20 +28,14 @@ public class InvoiceMotorcycle {
                 "\nRented Vehicle: " + model+
                 "\nReservation start date: " + startDate +
                 "\nReservation end date: " + endDate +
-                "\nReserved rental days: " + ChronoUnit.DAYS.between(startDate,endDate) +
+                "\nReserved rental days:  " + ChronoUnit.DAYS.between(startDate,endDate) +
                 "\nActual return date: " + returnDate +
                 "\nActual rental days: " + ChronoUnit.DAYS.between(startDate, returnDate) +
                 "\nRental cost per day: $" + String.format("%.2f",dailyRentalCost) +
                 "\nInsurance per day: $" + String.format("%.2f",dailyInsuranceCost) +
-                "\nTotal rent: $" + String.format("%.2f",totalRentalCost) +
+                "\nTotal rent: $" + String.format("%.2f", totalRentalCost) +
                 "\nTotal insurance: $" + String.format("%.2f",totalInsuranceCost) +
                 "\nTotal: $" + String.format("%.2f",totalPrice) +
-                "\nXXXXXXXXXXXXXXXXXXXX"
-        );
-
-
-
-
-
+                "\nXXXXXXXXXXXXXXXXXXXX");
     }
 }

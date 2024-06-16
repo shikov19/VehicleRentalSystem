@@ -1,21 +1,20 @@
-package models;
+package model;
 
-import interfaces.iCargo;
+import interfaces.ICargoVan;
 
-public class Cargo implements iCargo {
+public class CargoVan implements ICargoVan {
     private String model;
     private double value;
     private int experience;
     private double rentalCost;
     private double insuranceCost;
     private int rentalDays;
-    public Cargo( String model, double value, int experience, int rentalDays) {
+    public CargoVan(String model, double value, int experience, int rentalDays) {
         this.model = model;
         this.value = value;
         this.experience = experience;
         this.rentalDays = rentalDays;
     }
-
 
     @Override
     public String getModel() {
@@ -34,10 +33,11 @@ public class Cargo implements iCargo {
 
     @Override
     public double getInsuranceCost() {
-        if (experience <= 5) return (value * 0.03) / 100;
-        else return ((value * 0.03) / 100) * 0.85;
+        if (experience <= 5) {
+            return (value * 0.03) / 100;
+        }
+        return ((value * 0.03) / 100) * 0.85;
     }
-
 
     @Override
     public int getRentalDays() {
@@ -49,6 +49,6 @@ public class Cargo implements iCargo {
         if(rentalDays <= 7) {
             return 50;
         }
-        else return 40;
+        return 40;
     }
 }

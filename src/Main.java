@@ -1,9 +1,9 @@
-import models.Car;
-import models.Cargo;
-import models.Motor;
-import service.InvoiceCar;
-import service.InvoiceCargo;
-import service.InvoiceMotorcycle;
+import model.Car;
+import model.CargoVan;
+import model.Motorcycle;
+import service.CarService;
+import service.CargoVanService;
+import service.MotorcycleService;
 
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -11,15 +11,12 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        InvoiceCar invoiceCar = new InvoiceCar();
-        InvoiceMotorcycle invoiceMotorcycle = new InvoiceMotorcycle();
-        InvoiceCargo invoiceCargo = new InvoiceCargo();
-
+        CarService carService = new CarService();
+        MotorcycleService motorcycleService = new MotorcycleService();
+        CargoVanService invoiceCargo = new CargoVanService();
 
         System.out.println("Welcome to the Vehicle Rental Calculator");
         System.out.print("Please enter your first and last name: ");
@@ -44,10 +41,8 @@ public class Main {
             }
         }
 
-
         System.out.println("Enter vehicle model: ");
         String model = scanner.nextLine().trim();
-
 
         double value = 0.0;
         boolean validValue = false;
@@ -97,9 +92,10 @@ public class Main {
         int rentalDays = (int) ChronoUnit.DAYS.between(startDate, endDate);
 
         Car car;
-        Motor moto;
-        Cargo cargo;
+        Motorcycle moto;
+        CargoVan cargoVan;
         String invoice;
+
         switch (choice) {
             case 1:
                 System.out.print("Enter car safety rating: ");
@@ -119,13 +115,11 @@ public class Main {
                 }
 
                 car = new Car(model, value, rating, rentalDays);
-
-                invoice = invoiceCar.generateInvoice(car, startDate, endDate, returnDate, name);
+                invoice = carService.generateInvoice(car, startDate, endDate, returnDate, name);
                 System.out.println(invoice);
 
                 break;
             case 2:
-
                 int age = 0;
                 boolean validAge = false;
                 while (!validAge) {
@@ -144,8 +138,8 @@ public class Main {
                     }
                 }
 
-                moto = new Motor(model, value, age, rentalDays);
-                invoice = invoiceMotorcycle.generateInvoice(moto, startDate, endDate, returnDate, name);
+                moto = new Motorcycle(model, value, age, rentalDays);
+                invoice = motorcycleService.generateInvoice(moto, startDate, endDate, returnDate, name);
                 System.out.println(invoice);
 
                 break;
@@ -162,16 +156,17 @@ public class Main {
                         else {
                             System.out.println("Driver's experience must be at least 1 year.");
                         }
-
-                    } catch (NumberFormatException e) {
+                    }
+                    catch (NumberFormatException e) {
                         System.out.println("Invalid input. Please enter a valid number.");
                     }
                 }
 
-                cargo = new Cargo(model, value, experience, rentalDays);
-                invoice = invoiceCargo.generateInvoice(cargo, startDate, endDate, returnDate, name);
+                cargoVan = new CargoVan(model, value, experience, rentalDays);
+                invoice = invoiceCargo.generateInvoice(cargoVan, startDate, endDate, returnDate, name);
                 System.out.println(invoice);
                 break;
+
             default:
             break;
         }

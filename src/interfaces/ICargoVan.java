@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface iCargo {
+public interface ICargoVan {
     String getModel();
     double getValue();
     int getExperience();
